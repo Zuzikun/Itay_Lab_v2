@@ -14,6 +14,6 @@
         spec:
           containers:
           - name: http-webserver-container
-            image: zuzikun/zuzikun_repo:latest # Your Docker Hub image
+            image: zuzikun/zuzikun_repo:c129ba2f6ae2cad97bdbf73fbb2d582bdd1e7359 # Your Docker Hub image
             ports:
             - containerPort: 80 # The port your application listens on inside the container
