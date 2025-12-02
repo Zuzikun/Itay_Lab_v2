@@ -1,0 +1,19 @@
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: http-webserver
+    spec:
+      replicas: 3 # Number of desired replicas of your application
+      selector:
+        matchLabels:
+          app: http-webserver
+      template:
+        metadata:
+          labels:
+            app: http-webserver
+        spec:
+          containers:
+          - name: http-webserver-container
+            image: zuzikun/zuzikun_repo:latest # Your Docker Hub image
+            ports:
+            - containerPort: 80 # The port your application listens on inside the container
