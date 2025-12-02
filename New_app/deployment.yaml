@@ -1,9 +1,9 @@
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-        name: http-webserver
+      name: http-webserver
     spec:
-        replicas: 3 # Number of desired replicas of your application
+      replicas: 3 # Number of desired replicas of your application
       selector:
         matchLabels:
           app: http-webserver
