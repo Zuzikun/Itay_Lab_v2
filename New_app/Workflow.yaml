@@ -3,7 +3,7 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - dev-01  # Replace with your branch name
+      - main  # Replace with your branch name
 
 jobs:
   build-and-push:
@@ -25,10 +25,10 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./lesson-cicd/practice-04  # Path to the Dockerfile and build context
+          context: ./New_app/  # Path to the Dockerfile and build context
           push: true
           tags: |
-            dinghy123/app-node:${{ github.sha }}
+            zuzikun/zuzikun_repo:${{ github.sha }}
 
       - name: Logout from Docker Hub
         run: docker logout
