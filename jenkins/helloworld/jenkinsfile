@@ -1,0 +1,40 @@
+pipeline {
+    agent any // The Jenkins agent where this pipeline will run
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image using the Dockerfile in the current directory
+                    // The tag uses the current build number for uniqueness
+                    sh 'docker build -t helloworld-app:$BUILD_NUMBER .'
+                }
+            }
+        }
+
+        stage('Stop and Remove Old Container') {
+            steps {
+                script {
+                    // Stop and remove the previously running container if it exists
+                    // The "|| true" ensures the build doesn't fail if the container isn't running
+                    sh 'docker stop helloworld-app || true'
+                    sh 'docker rm helloworld-app || true'
+                }
+            }
+        }
+
+        stage('Run New Container') {
+            steps {
+                script {
+                    // Run the newly built Docker image, mapping port 8000 on the host to 3000 in the container
+                    sh 'docker run -d --name helloworld-app -p 8000:3000 helloworld-app:$BUILD_NUMBER'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline finished. Check http://localhost:8000 to see your app.'
+        }
+    }
+}
